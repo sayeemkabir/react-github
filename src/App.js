@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Layouts/Header";
 import Users from "./components/Users";
+import Newtest from "./components/Newtest";
 import Search from "./components/Search";
-
+import About from "./Layouts/About";
+import Contact from "./Layouts/Contact";
+import FAQ from "./Layouts/FAQ";
 class App extends Component {
   state = {
     users: [],
@@ -34,11 +38,33 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <Search SearchUsers={this.SearchUsers} />;
-        <Users users={this.state.users} loading={this.state.loading} />
-      </div>
+      <Router>
+        <div className="app">
+          <Header />
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <Search SearchUsers={this.SearchUsers} />;
+                  <Users
+                    users={this.state.users}
+                    loading={this.state.loading}
+                  />
+                </>
+              }
+            />
+
+            <Route exact path="/About" element={<About />} />
+
+            <Route exact path="/Contact" element={<Contact />} />
+
+            <Route exact path="/FAQ" element={<FAQ />} />
+            <Route path="/user/:login" element={<Newtest {...this.props} />} />
+          </Routes>
+        </div>
+      </Router>
     );
   }
 }

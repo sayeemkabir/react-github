@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 const Useritems = ({ users }) => {
   return users.map((user) => (
@@ -10,12 +11,12 @@ const Useritems = ({ users }) => {
       />
       <h3 className="mb-2">{user.login}</h3>
 
-      <a
+      <Link
         className="bg-blue-900 text-white px-3 py-2 rounded-sm"
-        href={user.html_url}
+        to={`/user/${user.login}`}
       >
         Learn More about {user.login}
-      </a>
+      </Link>
     </div>
   ));
 };
